@@ -4,11 +4,12 @@ import { ethers } from 'ethers';
 import FormField from '../components/FormField';
 import { money } from '../assets';
 import {business } from '../assets'
-
+import Button from '../components/Button';
+// import { useStateContext } from '../context';
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  // const {createCampaign} = useStateContext()
   const [form, setForm] = useState({
     name: '',
     title: '',
@@ -24,6 +25,7 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(form)
 
     checkIfImage(form.image, async (exists) => {
       if(exists) {
@@ -43,8 +45,8 @@ const CreateCampaign = () => {
       {isLoading && <Loader />}
       <div className='sm:min-w-[380px]  rounded-[10px] m-auto'>
         <ul className="steps steps-horizontal">
-          <li className="step step-warning">Register</li>
-          <li className="step step-warning">Start Campaign</li>
+          <li className="step ">Register</li>
+          <li className="step ">Start Campaign</li>
           <li className="step">Purchase</li>
           <li className="step">Receive Product</li>
         </ul>
@@ -83,7 +85,7 @@ const CreateCampaign = () => {
           />
          
         
-        <div className="w-full flex overflow-hidden justify-start items-center sm:flex-column p-4 bg-[#C35214] h-[250px] rounded-[10px]">
+        <div className="w-full flex overflow-hidden justify-start items-center sm:flex-column p-4 bg-[#2cd2e1b6] h-[250px] rounded-[10px]">
           <img src={business} alt="money" className="w-[200px] h-[200px] object-contain"/>
           <div>
           <h4 className="font-epilogue font-bold text-[25px] text-white m-auto">You will get 100% of the raised amount</h4>
@@ -110,12 +112,20 @@ const CreateCampaign = () => {
 
       {/* col item 3 */}
       
-      <input type="file" title='' className="file-input file-input-bordered file-input-warning w-full max-w-xs" />
+      <FormField 
+            labelName="Campaign image *"
+            placeholder="Place image URL of your campaign"
+            inputType="url"
+            value={form.image}
+            handleChange={(e) => handleFormFieldChange('image', e)}
+          />
 
           <div className="flex justify-center items-center mt-[40px]">
-          <button className="btn sm:btn-sm md:btn-md lg:btn-md bg-[#ED9121] btn-glass text-white rounded-[10px]"
-              
-            >Submit new campaign</button>
+          <Button
+              btnType="submit"
+              title="Submit new campaign"
+              styles="bg-[#2cd2e1b6]"
+            />
           </div>
       </form>
     </div>

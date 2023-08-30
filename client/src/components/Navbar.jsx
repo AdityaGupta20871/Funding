@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-
+import Button from './Button'
 // import { useStateContext } from '../context';
-// import { CustomButton } from './';
+
 import { logo, menu, search, thirdweb } from '../assets';
 import { navlinks } from '../constants';
 
@@ -10,31 +10,32 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState('dashboard');
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const address = '0x67su'
-  const handleClick=() => {
-    if(address) navigate('create-campaign')
-    else connect()
-  }
+  // const {connect,address} = useStateContext()
+  const address = '0xF88fc15C5F86872A74477cC7Ab72513a8C2023f1'
+
+
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <div className="lg:flex-1 flex flex-row max-w-[480px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px] m-auto">
+      <div className="lg:flex-1 flex flex-row max-w-[480px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px] ">
         <input type="text" placeholder="Search for campaigns" className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
         
-        <div className="w-[72px] h-full rounded-[20px] bg-[#ED9121] flex justify-center items-center cursor-pointer">
+        <div className="w-[72px] h-full rounded-[20px] bg-[#068DA9] flex justify-center items-center cursor-pointer">
           <img src={search} alt="search" className="w-[15px] h-[15px] object-contain"/>
         </div>
       </div>
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
         {/* button */}
-        <button className="btn sm:btn-sm md:btn-md lg:btn-md bg-[#ED9121] btn-glass text-white rounded-[10px]"
+        <Button className="btn sm:btn-sm md:btn-md lg:btn-md bg-[#068DA9] btn-glass text-white rounded-[10px]"
+        btnType='button'
        title={address ? 'Create a campaign' : 'Connect'}
-       styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
-       onClick={handleClick}
-      >
-      
-        Create a Campaign</button>
+       styles={address ? 'bg-[#068DA9]' : 'bg-[#068DA9]'}
+       const handleClick={() => {
+        if(address) navigate('create-campaign')
+        else connect()
+      }}
+      />
 
         <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
@@ -73,7 +74,7 @@ const Navbar = () => {
                     alt={link.name}
                     className={`w-[24px] h-[24px] object-contain ${isActive === link.name ? 'grayscale-0' : 'grayscale'}`}
                   />
-                  <p className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? 'text-[#ED9121]' : 'text-[#808191]'}`}>
+                  <p className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? 'text-[#068DA9]' : 'text-[#808191]'}`}>
                     {link.name}
                   </p>
                 </li>
@@ -81,12 +82,15 @@ const Navbar = () => {
             </ul>
 
             <div className="flex mx-4">
-            <button className="btn sm:btn-sm md:btn-md lg:btn-md bg-[#ED9121] btn-glass text-white rounded-[10px]"
-              
+            <Button 
+              btnType="button"
               title={address ? 'Create a campaign' : 'Connect'}
-              styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
-              
-            >Create a Campaign</button>
+              styles={address ? 'bg-[#068DA9]' : 'bg-[#068DA9]'}
+              handleClick={() => {
+                if(address) navigate('create-campaign')
+                else connect();
+              }}
+            />
             </div>
           </div>
         </div>
